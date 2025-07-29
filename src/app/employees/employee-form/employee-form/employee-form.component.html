@@ -1,0 +1,43 @@
+<h2 class="mb-3">{{ id ? 'Edit' : 'New' }} Employee</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="mb-3">
+    <label class="form-label">First Name</label>
+    <input class="form-control" formControlName="firstName" />
+    <div *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid" class="text-danger">
+      First name is required.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Last Name</label>
+    <input class="form-control" formControlName="lastName" />
+    <div *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid" class="text-danger">
+      Last name is required.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Position</label>
+    <input class="form-control" formControlName="position" />
+    <div *ngIf="form.get('position')?.touched && form.get('position')?.invalid" class="text-danger">
+      Position is required.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Manager</label>
+    <select class="form-select" formControlName="managerId">
+      <option value="" disabled>Select a manager</option>
+      <option *ngFor="let m of managers" [value]="m.managerId">
+        {{ m.firstName }} {{ m.lastName }}
+      </option>
+    </select>
+    <div *ngIf="form.get('managerId')?.touched && form.get('managerId')?.invalid" class="text-danger">
+      Manager is required.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success me-2" [disabled]="form.invalid">Save</button>
+  <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+</form>

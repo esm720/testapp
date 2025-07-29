@@ -1,0 +1,36 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Stores</h2>
+  <button class="btn btn-primary" (click)="add()">+ New Store</button>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th style="width:150px">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of stores">
+      <td>{{ s.storeId }}</td>
+      <td>{{ s.name }}</td>
+      <td>{{ s.address }}</td>
+      <td>
+        <button
+          class="btn btn-sm btn-outline-secondary me-1"
+          (click)="edit(s.storeId)"
+        >
+          Edit
+        </button>
+        <button
+          class="btn btn-sm btn-outline-danger"
+          (click)="delete(s.storeId)"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

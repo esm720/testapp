@@ -1,0 +1,35 @@
+<h2 class="mb-3">{{ id ? 'Edit' : 'New' }} Manager</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="mb-3">
+    <label class="form-label">First Name</label>
+    <input class="form-control" formControlName="firstName" />
+    <div *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid" class="text-danger">
+      First name is required.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Last Name</label>
+    <input class="form-control" formControlName="lastName" />
+    <div *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid" class="text-danger">
+      Last name is required.
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Store</label>
+    <select class="form-select" formControlName="storeId">
+      <option value="" disabled>Select a store</option>
+      <option *ngFor="let s of stores" [value]="s.storeId">
+        {{ s.name }}
+      </option>
+    </select>
+    <div *ngIf="form.get('storeId')?.touched && form.get('storeId')?.invalid" class="text-danger">
+      Store is required.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success me-2" [disabled]="form.invalid">Save</button>
+  <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+</form>
